@@ -1,0 +1,26 @@
+extends: existence
+message: "Don't use internet slang abbreviations such as '%s'."
+link: 'https://style-guide.ah.technology/#internet-slang'
+ignorecase: true
+level: error
+tokens:
+  - 'tl;dr'
+  - afaik
+  - brb
+  - btw
+  - fwiw
+  - fyi
+  - gtg
+  - idk
+  - imho
+  - imo
+  - lmao
+  - lol
+  - plz
+  - rofl
+  - rtfm
+  - tbh
+  - thx
+  - tldr
+  - u
+  - ymmv

@@ -1,0 +1,19 @@
+extends: existence
+message: "Avoid first-person (plural) pronouns such as '%s'."
+link: 'https://style-guide.ah.technology/#first-person'
+ignorecase: true
+level: warning
+nonword: true
+tokens:
+  - (?:^|\s)I\s
+  - (?:^|\s)I,\s
+  - \bI'm\b
+  - \bme\b
+  - \bmy\b
+  - \bmine\b
+  - \bwe\b
+  - \bwe'(?:ve|re)\b
+  - \bours?\b
+  - \bus\b
+  - \blet's\b
+

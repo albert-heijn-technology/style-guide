@@ -1,0 +1,7 @@
+extends: existence
+message: "Commas and periods go inside quotation marks."
+link: 'https://style-guide.ah.technology/#quotation-marks'
+level: error
+nonword: true
+tokens:
+  - '"[^"]+"[.,?]'

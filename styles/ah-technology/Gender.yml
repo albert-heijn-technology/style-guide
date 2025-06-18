@@ -1,0 +1,9 @@
+extends: existence
+message: "Don't use '%s' as a gender-neutral pronoun."
+link: 'https://style-guide.ah.technology/#inclusivity'
+level: error
+ignorecase: true
+tokens:
+  - he/she
+  - s/he
+  - \(s\)he

@@ -1,0 +1,13 @@
+extends: existence
+message: "Don't use end punctuation in headings."
+link: "https://style-guide.ah.technology/#heading-punctuation"
+nonword: true
+level: warning
+scope: heading
+action:
+  name: edit
+  params:
+    - trim_right
+    - ".?!"
+tokens:
+  - "[a-z][.?!]$"

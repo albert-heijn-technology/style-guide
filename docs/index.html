@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Style guide</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="color-scheme" content="dark light">
+    <script language="javascript">
+      function generateTOC() {
+        const nav = document.querySelector("nav");
+        const menu = document.createElement("menu");
+        document.querySelectorAll("h2, h3").forEach((heading, index) => {
+          if (heading.id) {
+            heading.style.cursor = "pointer";
+            heading.onclick = (e) => window.location.hash = heading.id;
+            const li = document.createElement("li");
+            if (heading.tagName === "H2") {
+              const p = document.createElement("p");
+              p.innerHTML = '' + heading.textContent + '';
+              p.style.cursor = "pointer";
+              p.onclick = (e) => window.location.hash = heading.id;
+              li.appendChild(p);
+            } else {
+              const a = document.createElement("a");
+              a.href = "#" + heading.id;
+              a.innerHTML = '' + heading.textContent + '';
+              li.appendChild(a);
+            }
+            menu.appendChild(li);
+
+            if (heading.hasAttribute("data-rule")) {
+              const sup = document.createElement("sup");
+              const rule = document.createElement("a");
+              rule.textContent = "[rule]";
+              rule.href = heading.getAttribute("data-rule");
+              sup.appendChild(rule);
+              heading.appendChild(sup);
+            }
+          }
+        });
+        const menuTitle = document.createElement("h2");
+        menuTitle.textContent = "Table of contents";
+        nav.appendChild(menuTitle);
+        nav.appendChild(menu);
+      }
+      window.addEventListener("DOMContentLoaded", generateTOC);
+    </script>
+    <style type="text/css">
+      html {
+        overflow-y: scroll;
+      }
+      body {
+        background: #F3F6F8;
+        color: #484848;
+        padding: 0rem;
+        margin: 0rem;
+        font-family: "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+        font-size: 1.3em;
+      }
+      header {
+        background-color: #FFFFFF;
+        border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+        margin: 1rem auto 0 auto;
+        padding: 1rem 2rem 1rem 2rem;
+        max-width: 45rem;
+      }
+      nav {
+        border-bottom: dashed #FF7900;
+        border-top: dashed #FF7900;
+        background-color: #FFFFFF;
+        margin: 0 auto 0 auto;
+        padding: 0rem 2rem 2rem 2rem;
+        max-width: 45rem;
+      }
+      main {
+        background-color: #FFFFFF;
+        margin: 0 auto 0 auto;
+        padding: 1rem 2rem 1rem 2rem;
+        max-width: 45rem;
+      }
+      main section {
+        padding-bottom: 3rem;
+      }
+      main section article {
+        padding-bottom: 2rem;
+      }
+      aside {
+        background-color: #FFFFFF;
+        border-top: dashed #FF7900;
+        margin: 0 auto 0 auto;
+        padding: 1rem 2rem 1rem 2rem;
+        max-width: 45rem;
+      }
+      footer {
+        background-color: #FFFFFF;
+        border-top: dashed #FF7900;
+        border-bottom-right-radius: 25px;
+        border-bottom-left-radius: 25px;
+        margin: 0 auto 1rem auto;
+        padding: 1rem 2rem 1rem 2rem;
+        max-width: 45rem;
+      }
+      nav menu {
+        list-style-type: none;
+        padding: 0rem;
+        margin: 0rem;
+      }
+      nav menu li {
+        font-weight: normal;
+        line-height: 1.2rem;
+      }
+      nav menu li p {
+        font-weight: bold;
+        padding-top: 0.3rem;
+      }
+      h1 {
+        font-size: 2.5em;
+        text-decoration-skip-ink: auto;
+        text-decoration-color: #FF7900;
+        text-decoration-line: underline;
+        text-decoration-style: wavy;
+      }
+      h2 {
+        font-size: 1.8em;
+      }
+      h3 {
+        font-size: 1.4em;
+      }
+      h3 sup {
+        padding-left: 0.7rem;
+      }
+      h3 sup a {
+        font-size: 0.7em;
+      }
+      a {
+        color: #00ADE6;
+        text-decoration: none;
+      }
+      a:visited {
+        color: #00ADE6;
+      }
+      article {
+          padding-bottom: 0.5rem;
+      }
+      textarea {
+        overflow: auto;
+      }
+      hr {
+        padding: 0;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        color: #F3F6F8;
+      }
+      code {
+        background: #F3F6F8;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #212830;
+        }
+        header, nav, main, aside, footer {
+          background-color: #F3F6F8;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1><span style="color: #00ADE6">AH Technology</span>
+        style guide</h1>
+      <p>
+        This guide lies down some rules for creating a uniform writing style.<br>
+        Using a uniform writing style offers several benefits, supported by extensive research:
+      </p>
+      <p>
+        <b>Enhances clarity and readability</b><br>
+        A consistent style makes documents easier to understand and follow, reducing ambiguity and the chance of misinterpretation. Research shows improved writing can increase usability by up to 124%.
+      </p>
+      <p>
+        <b>Improves professionalism and brand identity</b><br>
+        Uniformity projects a professional image and reinforces brand consistency across all company communications.
+      </p>
+      <p>
+        <b>Increases efficiency</b><br>
+        Writers can create content more quickly by following established guidelines, and readers can find information faster due to predictable structure and language.
+        Studies demonstrate productivity gains of up to 37% with clear writing.
+      </p>
+      <p>
+        <b>Simplifies collaboration and maintenance</b><br>
+        When multiple authors contribute, a common style ensures coherence and makes documents easier to update and maintain over time.
+      </p>
+      <p>
+        <b>Facilitates translation and localization</b><br>
+        Consistent terminology and sentence structure simplify the process of translating documents for global audiences.
+      </p>
+      <p>
+        <b>Reduces learning curve</b><br>
+        New employees can more easily understand and absorb information when it's presented in a familiar and consistent format.
+      </p>
+      <p>
+        <b>Enables enterprise scalability</b><br>
+        Style guides allow organizations to maintain consistency across large, distributed teams and global operations.
+        Both Google and Microsoft demonstrate how comprehensive style guides support thousands of contributors while maintaining quality and coherence.
+      </p>
+      <p>
+        <b>Aligns with industry standards</b><br>
+        Following established patterns used by leading technology companies ensures compatibility with widely adopted practices.
+      </p>
+    </header>
+    <nav></nav>
+    <main>
+      <section>
+        <h2 id="headings-and-structure">Headings and structure</h2>
+        <article>
+          <h3 id="heading-style" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/HeadingStyle.yml">Heading style</h3>
+          <p>
+            Use sentence-style heading capitalization.<br>
+            Only capitalize the first letter, this is easier on the eye as the heading reads as a normal sentences.
+            Markup or styling makes a heading stand out, no need for extra capitalization.<br>
+            Standard capitalization rules still apply for names, brands, weekdays, etc.
+          </p>
+          <p>
+            <b>Correct:</b>
+            "Capitalization in heading style"<br>
+            <b>Incorrect:</b>
+            "Capitalization in Heading Style"
+          </p>
+          <p>
+          </p>
+          <p>
+            <b>Note:</b>
+            if this rule fires because of an unknown name, add the name to the vocabulary file.
+          </p>
+        </article>
+        <article>
+          <h3 id="heading-punctuation" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/HeadingPunctuation.yml">Heading punctuation</h3>
+          <p>
+            Don't end headings with punctuation marks such as periods, question marks, or exclamation points.
+            Headings should be concise and clear without trailing punctuation.
+          </p>
+          <p>
+            <b>Correct:</b>
+            "Heading punctuation"<br>
+            <b>Incorrect:</b>
+            "Heading punctuation."
+          </p>
+        </article>
+      </section>
+      <section>
+        <h2 id="sentence-structure">Sentence structure</h2>
+        <article>
+          <h3 id="active-voice" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/Passive.yml">Active voice</h3>
+          <p>Using an active voice helps in clearly conveying the message.</p>
+          <p>A shorter and more clear message makes it easier to understand. Fixing this error often entails rewriting the sentence.</p>
+          <p>
+            <b>Correct</b>
+            (active voice): "Set the boolean to
+            <code>true</code>"<br>
+            <b>Incorrect</b>
+            (passive voice): "The boolean must be set to
+            <code>true</code>"
+          </p>
+        </article>
+        <article>
+          <h3 id="accessibility-considerations">Accessibility considerations</h3>
+          <p>Not everyone speaks English natively. Write short and easy sentences using common words, making it easier to understand.</p>
+          <p>Splitting up long sentences into shorter ones can help with readability.</p>
+        </article>
+      </section>
+      <section>
+        <h2 id="word-choice-and-terminology">Word choice and terminology</h2>
+        <article>
+          <h3 id="colons" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/Colons.yml">Colons</h3>
+          <p>
+            Text that follows a colon should be in lowercase, unless it's a proper noun or acronym.
+          </p>
+          <p>
+            <b>Correct:</b>
+            "Remember this rule: always use lowercase after colons."<br>
+            <b>Correct:</b>
+            "The system supports three formats: JSON, XML, and YAML."<br>
+            <b>Incorrect:</b>
+            "The system supports three formats: Json, Xml, and Yaml."
+          </p>
+        </article>
+        <article>
+          <h3 id="contractions" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/Contractions.yml">Contractions</h3>
+          <p>
+            Use contractions to make the text more conversational and approachable.<br>
+            For example: "don't" instead of "do not", "it's" instead of "it is", "you're" instead of "you are".
+          </p>
+        </article>
+        <article>
+          <h3 id="date-format" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/DateFormat.yml">Date format</h3>
+          <p>
+            Use the ISO 8601 date format (for example, YYYY-MM-DD), not:<br>
+            31.07.2016 or 31/07/2016 or 31 July 2016, or July 31, 2016.
+          </p>
+          <p>
+            <b>Correct:</b>
+            "2016-07-31" or "2025-05-26"<br>
+            <b>Incorrect:</b>
+            "31.07.2016," "31/07/2016," "July 31, 2016," or "31 July 2016"
+          </p>
+        </article>
+        <article>
+          <h3 id="first-person" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/FirstPerson.yml">First person</h3>
+          <p>
+            Avoid using first-person pronouns like "I", "we", or "you" in documentation.<br>
+            Instead, use third-person language to maintain a neutral and objective tone.<br>
+            For example: "The system allows users to configure settings" instead of "You can configure settings in the system."
+          </p>
+        </article>
+        <article>
+          <h3 id="future-tense" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/FutureTense.yml">Future tense</h3>
+          <p>
+            Avoid using future tense in documentation, as it can create confusion about when actions will take place.<br>
+            Instead, use present tense to describe current functionality or past tense for completed actions.<br>
+            For example: "The system supports multiple languages" instead of "The system will support multiple languages."
+          </p>
+        </article>
+        <article>
+          <h3 id="inclusivity" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/Inclusivity.yml">Inclusivity</h3>
+          <p>
+            Use inclusive language to ensure that documentation is accessible and respectful to all readers.
+          </p>
+          <p>
+            <b>Examples:</b>
+            <ul>
+              <li>Use "team," "folks," or "everyone" instead of "guys"</li>
+              <li>Use "staffed," "operated," or "managed" instead of "manned"</li>
+              <li>Use "blocklist/allowlist" instead of "blacklist/whitelist"</li>
+              <li>Use "primary/replica" instead of "master/slave"</li>
+              <li>Use gender-neutral pronouns like "they/them" when the gender is unknown</li>
+            </ul>
+          </p>
+        </article>
+        <article>
+          <h3 id="internet-slang" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/InternetSlang.yml">Internet slang</h3>
+          <p>
+            Avoid using internet slang or abbreviations that may not be universally understood.
+            For example, use "you" instead of "u", "please" instead of "plz", and "thank you" instead of "thx".<br>
+            This ensures clarity and professionalism in documentation.
+          </p>
+        </article>
+        <article>
+          <h3 id="latin" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/Latin.yml">Latin</h3>
+          <p>
+            Avoid using Latin phrases or abbreviations like "i.e.", "e.g.", "etc.", "et al.", or "cf." in documentation.<br>
+            Instead, use plain English equivalents to ensure clarity for all readers.<br>
+            For example: use "for example" instead of "e.g." and "that is" instead of "i.e.".
+          </p>
+        </article>
+        <article>
+          <h3 id="spatial-references" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/SpatialReferences.yml">Spatial references</h3>
+          <p>
+            Avoid using spatial references like "above", "below", "left", or "right" to describe content placement.<br>
+            Instead, use more descriptive terms that indicate the content's function or purpose.<br>
+            For example: "The settings menu allows users to configure preferences" instead of "See the settings menu above for configuration options."
+          </p>
+        </article>
+        <article>
+          <h3 id="spelling" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/Spelling.yml">Spelling</h3>
+          <p>
+            Use American English spelling for consistency.<br>
+            For example: "color" instead of "colour", "organize" instead of "organise", "realize" instead of "realise".<br>
+            If you use a spell checker, set it to American English.
+          </p>
+        </article>
+        <article>
+          <h3 id="word-list" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/WordList.yml">Word list</h3>
+          <p>
+            A predefined list of words and their suggested alternatives.
+          </p>
+        </article>
+      </section>
+      <section>
+        <h2 id="formatting-and-punctuation">Formatting and punctuation</h2>
+        <article>
+          <h3 id="acronyms-and-initialisms" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/Acronyms.yml">Acronyms and initialisms</h3>
+          <p>
+            Don't use periods with acronyms or initialisms, such as "H.T.M.L.".<br>
+            Spell out unfamiliar acronyms on first use of every page or document, followed by the acronym in parentheses.<br>
+            For example: "Integrated Development Environment (IDE)."<br>
+          </p>
+          <p>
+            No need to spell out common acronyms, for example: "API", "FAQ", "HTML", "PDF", "URL".
+          </p>
+        </article>
+        <article>
+          <h3 id="am-pm" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/AMPM.yml">AM/PM</h3>
+          <p>Use "AM" or "PM" (preceded by a space) for time references.</p>
+          <p>
+            <b>Correct:</b>
+            "10 AM" or "2 PM"<br>
+            <b>Incorrect:</b>
+            "10AM", "10am", "10a.m.", or "10 a.m."
+          </p>
+        </article>
+        <article>
+          <h3 id="ellipses" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/Ellipses.yml">Ellipses</h3>
+          <p>In general, don't use an ellipsis (...) unless indicating missing text in a quote.</p>
+          <p>
+            <b>Acceptable:</b>
+            "The documentation states: 'The API supports multiple formats... including JSON and XML.'"<br>
+            <b>Avoid:</b>
+            "Click the button... and wait for the response" or "Loading..."
+          </p>
+        </article>
+        <article>
+          <h3 id="em-dashes" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/EmDashes.yml">Em dashes</h3>
+          <p>
+            Use em dashes to set off additional information or explanations within a sentence.
+            Em dashes can replace commas or parentheses for emphasis or clarity.
+          </p>
+          <p>
+            Don't use a space before or after a dash.
+          </p>
+          <p>
+            <b>Correct:</b>
+            "The project—a collaborative effort—was completed ahead of schedule."<br>
+            <b>Incorrect:</b>
+            "The project — a collaborative effort — was completed ahead of schedule."
+          </p>
+          <p>
+            The only visual difference is their width.
+            The em dash
+            "&mdash;"
+            is wider than the hypen
+            "&hyphen;".
+          </p>
+          <p>
+            <b>Mac:</b>
+            Press
+            <code>Option</code>
+            +
+            <code>Shift</code>
+            +
+            <code>-</code>
+            to type an em dash.<br>
+            <b>Windows:</b>
+            Hold down the
+            <code>Alt</code>
+            key and type
+            <code>0151</code>
+            on the numeric keypad to type an em dash.<br>
+            <b>Android/iOS:</b>
+            Hold down the hyphen key on the virtual keyboard to access the em dash option.<br>
+            <b>Microsoft Word/Google Docs:</b>
+            Typ two hyphens in a row
+            "--"
+            followed by a space or text and it will automatically convert to an em dash.
+          </p>
+        </article>
+        <article>
+          <h3 id="exclamation-points" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/Exclamation.yml">Exclamation points</h3>
+          <p>
+            Don't use exclamation points in text.
+          </p>
+          <p>
+            <b>Correct:</b>
+            "This feature is now available" or "Complete the setup process"<br>
+            <b>Incorrect:</b>
+            "This feature is now available!" or "Complete the setup process!"
+          </p>
+        </article>
+        <article>
+          <h3 id="hyphened-adverbs" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/HyphenedAdverbs.yml">Hyphened adverbs</h3>
+          <p>
+            Words ending in "-ly" don't need a hyphen when they modify another word:<br>
+            Use "highly configurable system" instead of "highly-configurable system"
+          </p>
+          <p>
+            <b>Correct:</b>
+            "easily accessible interface," "frequently used feature"<br>
+            <b>Incorrect:</b>
+            "easily-accessible interface," "frequently-used feature"
+          </p>
+        </article>
+        <article>
+          <h3 id="number-ranges" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/NumberRanges.yml">Number ranges</h3>
+          <p>
+            Don't add words such as 'from' or 'between' to describe a range of numbers.<br>
+            Use a hyphen to indicate a range of numbers, such as
+            "10-20"
+            or
+            "100-200".<br>
+            Don't use "to" or "through" to indicate a range.<br>
+          </p>
+          <p>
+            <b>Correct:</b>
+            "10-20"<br>
+            <b>Incorrect:</b>
+            "10 to 20"
+            or
+            "10 through 20"
+          </p>
+        </article>
+        <article>
+          <h3 id="oxford-comma" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/OxfordComma.yml">Oxford comma</h3>
+          <p>
+            Use the Oxford comma. The comma before "and" or "or" in a series of three or more items removes ambiguity.<br>
+            <b>Correct:</b>
+            "I like cats, dogs, and rabbits."<br>
+            <b>Incorrect:</b>
+            "I like cats, dogs and rabbits."
+          </p>
+        </article>
+        <article>
+          <h3 id="ordinal-numbers" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/OrdinalNumbers.yml">Ordinal numbers</h3>
+          <p>
+            Spell out ordinal numbers (first, second, third, etc.) in text instead of using numerals (1st, 2nd, 3rd, etc.).
+          </p>
+        </article>
+        <article>
+          <h3 id="parentheses" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/Parentheses.yml">Parentheses</h3>
+          <p>Limit your use of parentheses. Consider whether the information would work better as a separate sentence or phrase.</p>
+          <p>
+            <b>Better:</b>
+            "The API supports JSON format. This format is widely used in web development."<br>
+            <b>Instead of:</b>
+            "The API supports JSON format (which is widely used in web development)."
+          </p>
+        </article>
+        <article>
+          <h3 id="plurals" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/Plurals.yml">Plurals</h3>
+          <p>
+            Don't use plurals in parentheses such as
+            "file(s)".<br>
+            Choose either the singular or plural form.
+          </p>
+          <p>
+            <b>Correct:</b>
+            "Upload the file" or "Upload files"<br>
+            <b>Incorrect:</b>
+            "Upload the file(s)"
+          </p>
+        </article>
+        <article>
+          <h3 id="quotation-marks" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/QuotationMarks.yml">Quotation marks</h3>
+          <p>
+            Commas and periods go inside quotation marks.
+          </p>
+          <p>
+            <b>Correct:</b>
+            "Upload the files."<br>
+            <b>Incorrect:</b>
+            "Upload the files".
+          </p>
+        </article>
+        <article>
+          <h3 id="semicolons" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/Semicolons.yml">Semicolons</h3>
+          <p>Use semicolons judiciously. Consider whether a period or a conjunction would work better.</p>
+          <p>
+            <b>Correct:</b>
+            "The API returns JSON data. The format is well-documented."<br>
+            <b>Correct:</b>
+            "The API returns JSON data, and the format is well-documented."<br>
+            <b>Questionable:</b>
+            "The API returns JSON data; the format is well-documented."
+          </p>
+        </article>
+        <article>
+          <h3 id="spacing" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/Spacing.yml">Spacing</h3>
+          <p>Use one space after periods, question marks, and exclamation points. Don't use two spaces.</p>
+          <p>
+            <b>Correct:</b>
+            "First sentence. Second sentence."<br>
+            <b>Incorrect:</b>
+            "First sentence.&nbsp;&nbsp;Second sentence." (two spaces)
+          </p>
+        </article>
+        <article>
+          <h3 id="units-of-measure" data-rule="https://github.com/albert-heijn-technology/style-guide/blob/main/styles/ah-technology/UnitsOfMeasure.yml">Units of measure</h3>
+          <p>Put a nonbreaking space between the number and the unit:</p>
+          <ul>
+            <li>For data measurements: B, kB, MB, GB, TB</li>
+            <li>For time measurements: ns, ms, s, min, h</li>
+          </ul>
+          <p>
+            <b>Correct:</b>
+            "The file is 5&nbsp;MB" or "The process takes 30&nbsp;ms"<br>
+            <b>Incorrect:</b>
+            "The file is 5MB" or "The process takes 30ms"
+          </p>
+        </article>
+      </section>
+    </main>
+    <aside>
+      <section>
+        <h2 id="usage">Usage</h2>
+        <p>
+          Following these rules by heart, or better yet, use automation to check your writing.
+          <b>Vale</b>
+          automatically checks with the ruleset defined here.
+        </p>
+        <article>
+          <h3 id="install-locally">Install locally</h3>
+          <p>
+            <a href="https://vale.sh/docs/install" target="_blank">Install Vale command-line tool</a>
+            locally to run checks from the commandline<br>
+            <a href="https://vale.sh/docs/guides/lsp" target="_blank">Install the Language Server Protocol (LSP) or IDE integration</a>
+            to run checks in your favorite editor<br>
+          </p>
+        </article>
+        <article>
+          <h3 id="configure-style">Configure style</h3>
+          <p>
+            Create and/or configure
+            <code>.vale.ini</code>
+            in the root of your project with this style:<br>
+            <textarea readonly rows="8" cols="88" wrap="off" style="overflow: auto;">StylesPath = styles
+MinAlertLevel = suggestion
+Packages = https://github.com/albert-heijn-technology/style-guide/releases/download/latest/ah-technology.zip
+Vocab = ah-technology
+
+[*]
+BasedOnStyles = ah-technology</textarea>
+          </p>
+          <p>
+            <b>StylesPath</b>: define where you want to store the downloaded styles, for example 'styles' or '.github/styles'.<br>
+            <b>MinAlertLevel</b>: the level of alerts you want to see, recommended: suggestion.<br>
+            <b>Packages</b>: the download location of the latest package (or pin it to a version).<br>
+            <b>Vocab</b>: the vocabulary to use, this can be expanded with your own file.<br>
+            <b>Per file based configuration</b>: styles to apply to files matching this pattern.
+          </p>
+          <p>
+            <b>Note:</b>
+            add the styles folder to your project's
+            <code>.gitignore</code>,
+            to prevent running with a stale copy.
+          </p>
+        </article>
+        <article>
+          <h3 id="vocabulary-file">Vocabulary file</h3>
+          <p>
+            The file
+            <code>&lt;StylesPath&gt;/config/vocabulary/&lt;Vocab&gt;/accept.txt</code>
+            contains a list of accepted words and phrases.
+                Check the
+            <code>.vale.ini</code>
+            configuration for their values.<br>
+            Add words that are not recognized by the style guide, such as names, brands, or technical terms.<br>
+          </p>
+        </article>
+      </section>
+      <section>
+        <h2 id="attribution">Attribution</h2>
+        <article>
+          <h3 id="base-styles">Base styles</h3>
+          <p>
+            This style is a mix of rules from the
+            <a href="https://github.com/errata-ai/Microsoft" target="_blank">Microsoft style</a>
+            and the
+            <a href="https://github.com/errata-ai/Google" target="_blank">Google style</a>
+            both by Joseph Kato released under the MIT license.
+          </p>
+        </article>
+        <article>
+          <h3 id="style-automation">Style automation</h3>
+          <p>
+            <a href="https://vale.sh" target="_blank">Vale</a>
+            made automated checking of the writing style a breeze.
+          </p>
+        </article>
+      </section>
+    </aside>
+    <footer>
+      <p>&copy; 2025 Albert Heijn Technology.
+        <a href="https://github.com/albert-heijn-technology/style-guide/blob/main/LICENSE">MIT</a>.</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,97 @@
+---
+name: Release style-guide
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create artifact
+        working-directory: styles/ah-technology
+        run: zip -r ../../ah-technology.zip .
+
+      - name: Create release and manage tags
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const tagName = context.ref.replace('refs/tags/', '');
+            const sha = context.sha;
+            const versionMatch = tagName.match(/^v(\d+)\.(\d+)\.(\d+)$/);
+            if (!versionMatch) {
+              core.setFailed('Tag does not match semver pattern v*.*.*');
+              return;
+            }
+            const [, major, minor, patch] = versionMatch;
+            const majorTag = `v${major}`;
+            const minorTag = `v${major}.${minor}`;
+
+            console.log(`Creating release for ${tagName}`);
+            const release = await github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: tagName,
+              name: tagName,
+              body: `Release ${tagName}`,
+              draft: false,
+              prerelease: false
+            });
+            console.log(`Created release: ${release.data.html_url}`);
+            const artifactPath = 'ah-technology.zip';
+            console.log(`Reading artifact: ${artifactPath}`);
+            const artifactData = fs.readFileSync(artifactPath);
+            console.log(`Uploading artifact: ${artifactPath}`);
+            await github.rest.repos.uploadReleaseAsset({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: release.data.id,
+              name: artifactPath,
+              data: artifactData
+            });
+            console.log('Uploaded artifact to release');
+            async function createOrUpdateTag(tagName, sha) {
+              try {
+                console.log(`Getting tag: ${tagName}`);
+                await github.rest.git.getRef({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  ref: `tags/${tagName}`
+                });
+                console.log(`Updating existing tag: ${tagName}`);
+                await github.rest.git.updateRef({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  ref: `tags/${tagName}`,
+                  sha: sha,
+                  force: true
+                });
+              } catch (error) {
+                if (error.status === 404) {
+                  console.log(`Creating new tag: ${tagName}`);
+                  await github.rest.git.createRef({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    ref: `refs/tags/${tagName}`,
+                    sha: sha
+                  });
+                } else {
+                  throw error;
+                }
+              }
+            }
+            console.log(`Updating major tag: ${majorTag}`);
+            await createOrUpdateTag(majorTag, sha);
+            console.log(`Updating minor tag: ${minorTag}`);
+            await createOrUpdateTag(minorTag, sha);
+            console.log(`Successfully updated tags: ${majorTag}, ${minorTag}`);
