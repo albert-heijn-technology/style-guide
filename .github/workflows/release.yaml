@@ -14,14 +14,14 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Create artifact
         working-directory: styles
         run: zip -r ../ah-technology.zip ah-technology
 
       - name: Create release and manage tags
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const fs = require('fs');
