@@ -21,7 +21,7 @@ jobs:
         run: zip -r ../ah-technology.zip ah-technology
 
       - name: Create release and manage tags
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const fs = require('fs');
